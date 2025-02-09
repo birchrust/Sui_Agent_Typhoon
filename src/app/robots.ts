@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/cdn-cgi/",
     },
-    sitemap: "https://www.lolai.vercel.com/sitemap.xml",
+    sitemap: "https://https://lolai.vercel.app/sitemap.xml",
   }
 }

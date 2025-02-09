@@ -20,7 +20,7 @@ const asap = Asap({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.LoLAI.dev"),
+  metadataBase: new URL("https://lolai.vercel.app/"),
   title: {
     default: "LoLAI",
     template: "%s | LoLAI",
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     title: "LoLAI",
     description:
       "A collection of awesome test components with smooth animations",
-    url: "https://www.LoLAI.dev",
+    url: "https://lolai.vercel.app/",
     siteName: "LoLAI",
     images: [
       {
         width: 1920,
         height: 1080,
-        url: "https://LoLAI.dev/og.jpg",
+        url: "https://lolai.vercel.app/og.jpg",
         alt: "LoLAI Cover",
       },
     ],
