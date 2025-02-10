@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { Pizza } from "lucide-react"
 
 export default function Footer() {
   return (

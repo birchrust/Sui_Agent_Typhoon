@@ -21,39 +21,39 @@ const asap = Asap({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lolai.vercel.app"),
+  metadataBase: new URL("https://suicasm.vercel.app"),
   title: {
-    default: "LoLAI",
-    template: "%s | LoLAI",
+    default: "Suicasm",
+    template: "%s | Suicasm",
   },
   openGraph: {
-    title: "LoLAI",
-    description: "LoLAI - AI Agent for Atoma Network",
-    url: "https://lolai.vercel.app",
-    siteName: "LoLAI",
+    title: "Suicasm",
+    description: "AI-powered humor analysis for your sui wallet - Where blockchain meets comedy!",
+    url: "https://suicasm.vercel.app",
+    siteName: "Suicasm",
     images: [
       {
         width: 1920,
         height: 1080,
-        url: "https://LoLAI.dev/og.png",
-        alt: "LoLAI Cover",
+        url: "https://suicasm.vercel.app/og.png",
+        alt: "Suicasm Cover",
       },
     ],
     locale: "en",
     type: "website",
   },
   twitter: {
-    title: "LoLAI",
+    title: "Suicasm",
     images: [
       {
         width: 1920,
         height: 1080,
-        url: "https://LoLAI.dev/og.png",
-        alt: "LoLAI Cover",
+        url: "https://suicasm.vercel.app/og.png",
+        alt: "Suicasm Cover",
       },
     ],
     card: "summary_large_image",
-    description: "LoLAI - AI Agent for Atoma Network",
+    description: "AI-powered humor analysis for your sui wallet - Where blockchain meets comedy!",
   },
   icons: {
     shortcut: "/favicon.ico",

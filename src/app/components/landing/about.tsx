@@ -26,13 +26,17 @@ const item = {
 
 const list = [
   {
-    title: "Atoma Network",
+    title: "AI-Powered Analysis",
     description:
-      "Build with Atoma, a decentralized private and verifiable AI execution network. It provides the infrastructure for developers and enterprises to use open-source AI models and build AI applications with full privacy.",
+      "Using Atoma Network's advanced AI capabilities, Suicasm analyzes your Sui wallet and generates witty, personalized insights. Our AI understands blockchain patterns and turns them into entertaining observations.",
   },
   {
-    title: "Sui",
-    description: "Sui delivers the benefits of Web3 with the ease of Web2",
+    title: "Privacy First",
+    description: "Built on Atoma Network's secure infrastructure, your wallet analysis is completely private and verifiable. We believe humor shouldn't compromise security.",
+  },
+  {
+    title: "Sui Integration",
+    description: "Seamlessly connects with Sui blockchain, providing real-time analysis of your wallet. Experience the perfect blend of blockchain technology and entertainment.",
   },
 ]
 
@@ -54,16 +58,15 @@ export function About() {
           className="font-title text-light-950 dark:text-dark-950 text-center text-3xl font-bold transition"
           variants={item}
         >
-          About LoL<span className="text-pink-500">AI </span>?
+          About Sui<span className="text-pink-500">casm</span>
         </motion.h2>
-        <div className="mt-16 grid gap-8 px-4 md:grid-cols-6">
-          <div className="hidden md:block" />
+        <div className="mt-16 grid gap-8 px-4 md:grid-cols-3">
           {list.map((i) => (
             <motion.div
               key={i.title}
               variants={item}
               className={cn(
-                "group border-light-200 bg-light-100 dark:border-dark-200 dark:bg-dark-100 relative col-span-2 flex flex-col rounded-2xl border p-6 backdrop-blur-lg transition-all hover:border-pink-200",
+                "group border-light-200 bg-light-100 dark:border-dark-200 dark:bg-dark-100 relative flex flex-col rounded-2xl border p-6 backdrop-blur-lg transition-all hover:border-pink-200",
                 "box-light dark:box-light"
               )}
             >
@@ -75,7 +78,6 @@ export function About() {
               </p>
             </motion.div>
           ))}
-          <div className="hidden md:block" />
         </div>
       </motion.section>
     </Sparkles>

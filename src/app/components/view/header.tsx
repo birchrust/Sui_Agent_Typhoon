@@ -1,8 +1,10 @@
+"use client"
+
 import { format } from "date-fns"
 import { motion } from "motion/react"
 import { TypeAnimation } from "react-type-animation"
 
-export function Header() {
+export const Header = () => {
   return (
     <motion.div
       initial={{ top: 300, opacity: 0 }}

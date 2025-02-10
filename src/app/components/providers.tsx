@@ -29,7 +29,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         <WalletProvider
           autoConnect
           stashedWallet={{
-            name: "LoLAI",
+            name: "Suicasm",
           }}
         >
           {children}

@@ -10,22 +10,14 @@ import { cn } from "../utils/cn"
 interface InputProps extends React.ComponentProps<"input"> {
   feedbackError?: string
   isPending?: boolean
-  currentState:
-    | {
-        errors: {
-          address?: string[] | undefined
-        }
-        success: string
-        apiError: string
-        data: string
-      }
-    | {
-        success: string
-        data: any
-        errors: {
-          address: string
-        }
-      }
+  currentState: {
+    success: string
+    data: any
+    errors: {
+      address: string
+    }
+    apiError: string | null
+  }
 }
 
 const EIXO_X_PLACEHOLDER = 24
@@ -72,9 +64,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const [isFocus, setIsFocus] = useState(false)
     const [internalValue, setInternalValue] = useState("")
-    const hasError =
-      currentState.errors.address ??
-      ("apiError" in currentState ? currentState.apiError : "")
+    const hasError = !!(currentState.apiError || currentState.errors.address)
     const handle = useCallback((type: "focus" | "blur") => {
       setIsFocus(type === "focus")
     }, [])
@@ -222,24 +212,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           </motion.span>
         </div>
 
-        {isError && (
-          <motion.span
-            className={feedbackErrorStyle()}
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              duration: STANDARD_DURATION,
-            }}
-          >
-            <AlertCircle size={12} />
-            {feedbackError}
-          </motion.span>
-        )}
-
         <div className="h-6">
           {hasError && (
             <motion.span
@@ -256,8 +228,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             >
               <AlertCircle size={12} />
               <span className="truncate">
-                {currentState.errors.address ??
-                  ("apiError" in currentState ? currentState.apiError : "")}
+                {currentState.apiError ||
+                  currentState.errors.address ||
+                  "Error"}
               </span>
             </motion.span>
           )}
@@ -278,7 +251,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               }}
             >
               <CheckCircle size={12} />
-              <span className="truncate">Successfully submitted!</span>
+              <span className="truncate">Analysis complete</span>
             </motion.span>
           )}
         </div>

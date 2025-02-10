@@ -1,7 +1,10 @@
 "use server"
 
 import { isValidSuiAddress } from "@mysten/sui/utils"
+import { v4 as uuidv4 } from "uuid"
 import { z } from "zod"
+
+import { addResult } from "./result"
 
 const contactFormSchema = z.object({
   address: z.string().refine((val) => isValidSuiAddress(val), {
@@ -12,8 +15,8 @@ const contactFormSchema = z.object({
 const response = {
   success: "",
   errors: { address: "" },
-  apiError: "",
-  data: "",
+  apiError: null as string | null,
+  data: "" as any,
 }
 
 export default async function analyticsAction(
@@ -29,7 +32,11 @@ export default async function analyticsAction(
     if (!validatedContactFormData.success) {
       const formFieldErrors =
         validatedContactFormData.error.flatten().fieldErrors
-      return { ...response, errors: formFieldErrors }
+      return {
+        ...response,
+        errors: { address: formFieldErrors.address?.[0] || "" },
+        apiError: null,
+      }
     }
 
     const { address } = validatedContactFormData.data
@@ -60,10 +67,18 @@ export default async function analyticsAction(
       }
 
       const data = await result.json()
+      const id = uuidv4()
+      const resultId = (await addResult(id, data?.meme1 ?? "", address)).id
+
       return {
         ...response,
         success: "Form submitted successfully",
-        data,
+        data: {
+          ...data,
+          resultId,
+          address,
+        },
+        apiError: null,
       }
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {

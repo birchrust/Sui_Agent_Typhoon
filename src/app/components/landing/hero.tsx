@@ -44,16 +44,16 @@ export function Hero() {
           damping: 20,
         }}
       >
-        <Image src="/dark-logo.png" width={120} height={120} alt="Logo Lolai" />
+        <Image src="/dark-logo.png" width={120} height={120} alt="Suicasm" />
       </motion.div>
 
       <h1 className="font-title text-light-950 dark:text-dark-950 text-center text-5xl font-bold tracking-tight transition md:text-6xl">
-        LoL<span className="ml-2 text-pink-500">AI</span>
+        Sui<span className="ml-2 text-pink-500">casm</span>
       </h1>
 
       <p className="text-light-900 dark:text-dark-900 mt-6 max-w-2xl text-center text-xl transition">
         Discover your{" "}
-        <span className="line-through decoration-pink-500">hidden</span> SUI
+        <span className="line-through decoration-pink-500">hidden</span> Sui
         wallet personality
         <br /> and unlock the true potential of your digital identity
       </p>
