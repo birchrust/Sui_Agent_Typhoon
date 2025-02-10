@@ -26,21 +26,16 @@ export const metadata: Metadata = {
     default: "LoLAI",
     template: "%s | LoLAI",
   },
-  description: "A collection of awesome test components with smooth animations",
-  keywords: [
-    "components, Smooth animations, Awesome test components, motion, motion, Interactive components",
-  ],
   openGraph: {
     title: "LoLAI",
-    description:
-      "A collection of awesome test components with smooth animations",
+    description: "LoLAI - AI Agent for Atoma Network",
     url: "https://lolai.vercel.app",
     siteName: "LoLAI",
     images: [
       {
         width: 1920,
         height: 1080,
-        url: "https://LoLAI.dev/og.jpg",
+        url: "https://LoLAI.dev/og.png",
         alt: "LoLAI Cover",
       },
     ],
@@ -53,15 +48,12 @@ export const metadata: Metadata = {
       {
         width: 1920,
         height: 1080,
-        url: "https://LoLAI.dev/og.jpg",
+        url: "https://LoLAI.dev/og.png",
         alt: "LoLAI Cover",
       },
     ],
     card: "summary_large_image",
-    description:
-      "A collection of awesome test components with smooth animations",
-    site: "@educalvolpz",
-    creator: "Eduardo Calvo",
+    description: "LoLAI - AI Agent for Atoma Network",
   },
   icons: {
     shortcut: "/favicon.ico",
@@ -85,7 +77,7 @@ type ComponentPageLayout = {
 
 export default function RootLayout({ children }: ComponentPageLayout) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body
         className={`${asap.variable} ${inter.className} bg-light-50 dark:bg-dark-50 antialiased transition-colors`}
       >

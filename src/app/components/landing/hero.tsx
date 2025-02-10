@@ -60,7 +60,7 @@ export function Hero() {
       <div className="mt-10 flex gap-4">
         {connectionStatus === "connected" ? (
           <Link
-            href="#about"
+            href="#to-analyze"
             className="candy-btn group relative isolate inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-medium"
           >
             Get Started
