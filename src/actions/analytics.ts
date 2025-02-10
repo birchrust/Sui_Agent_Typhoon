@@ -9,17 +9,17 @@ const contactFormSchema = z.object({
   }),
 })
 
+const response = {
+  success: "",
+  errors: { address: "" },
+  apiError: "",
+  data: "",
+}
+
 export default async function analyticsAction(
   _prevState: any,
   formData: FormData
 ) {
-  const response = {
-    success: "",
-    errors: { address: "" },
-    apiError: "",
-    data: "",
-  }
-
   try {
     const contactFormData = Object.fromEntries(formData)
 
@@ -35,9 +35,6 @@ export default async function analyticsAction(
     const { address } = validatedContactFormData.data
 
     try {
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 seconds timeout
-
       const result = await fetch(process.env.API_URL!, {
         method: "POST",
         headers: {
@@ -47,10 +44,7 @@ export default async function analyticsAction(
         body: JSON.stringify({
           address: address,
         }),
-        signal: controller.signal
       })
-
-      clearTimeout(timeoutId)
 
       if (!result.ok) {
         if (result.status === 504) {
@@ -61,7 +55,7 @@ export default async function analyticsAction(
         }
         return {
           ...response,
-          apiError: `Request failed: ${result.statusText || 'Unknown error'}`,
+          apiError: `Request failed: ${result.statusText || "Unknown error"}`,
         }
       }
 
@@ -72,19 +66,23 @@ export default async function analyticsAction(
         data,
       }
     } catch (error) {
-      if (error instanceof Error && error.name === 'AbortError') {
+      if (error instanceof Error && error.name === "AbortError") {
         return {
           ...response,
           apiError: "Request timeout. Please try again.",
         }
       }
-      
+
       return {
         ...response,
-        apiError: error instanceof Error ? error.message : "An unexpected error occurred",
+        apiError:
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred",
       }
     }
   } catch (e: any) {
-    return { ...response, apiError: "Unexpected error: " + e?.message }
+    const error = e as Error
+    return { ...response, apiError: "Unexpected error: " + error.message }
   }
 }
