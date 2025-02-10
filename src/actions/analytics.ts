@@ -53,7 +53,9 @@ export default async function analyticsAction(
         }),
       })
 
+      
       if (!result.ok) {
+        console.log("analytics:", result)
         if (result.status === 504) {
           return {
             ...response,
