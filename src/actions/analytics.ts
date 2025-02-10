@@ -34,24 +34,56 @@ export default async function analyticsAction(
 
     const { address } = validatedContactFormData.data
 
-    const result = await fetch(process.env.API_URL!, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.API_TOKEN}`,
-      },
-      body: JSON.stringify({
-        address: address,
-      }),
-    })
+    try {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 seconds timeout
 
-    if (!result.ok) {
-      throw new Error(`API request failed: ${result.statusText}`)
+      const result = await fetch(process.env.API_URL!, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.API_TOKEN}`,
+        },
+        body: JSON.stringify({
+          address: address,
+        }),
+        signal: controller.signal
+      })
+
+      clearTimeout(timeoutId)
+
+      if (!result.ok) {
+        if (result.status === 504) {
+          return {
+            ...response,
+            apiError: "Request timeout. Please try again.",
+          }
+        }
+        return {
+          ...response,
+          apiError: `Request failed: ${result.statusText || 'Unknown error'}`,
+        }
+      }
+
+      const data = await result.json()
+      return {
+        ...response,
+        success: "Form submitted successfully",
+        data,
+      }
+    } catch (error) {
+      if (error instanceof Error && error.name === 'AbortError') {
+        return {
+          ...response,
+          apiError: "Request timeout. Please try again.",
+        }
+      }
+      
+      return {
+        ...response,
+        apiError: error instanceof Error ? error.message : "An unexpected error occurred",
+      }
     }
-
-    const data = await result.json()
-
-    return { ...response, success: "true", data }
   } catch (e: any) {
     return { ...response, apiError: "Unexpected error: " + e?.message }
   }
