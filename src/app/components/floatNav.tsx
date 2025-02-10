@@ -43,7 +43,7 @@ export function FloatNav() {
         </svg>
         <Tooltip id="share" offset={16} />
       </Link>
-      {connectionStatus !== "connected" ? (
+      {/* {connectionStatus !== "connected" ? (
         <div className="cursor-not-allowed opacity-50">
           <div
             data-tooltip-id="connect-wallet"
@@ -67,7 +67,7 @@ export function FloatNav() {
           <Component size={24} aria-hidden="true" />
           <Tooltip id="publish" offset={16} />
         </Link>
-      )}
+      )} */}
     </nav>
   )
 }
