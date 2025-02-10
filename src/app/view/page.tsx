@@ -3,9 +3,12 @@
 import localFont from "next/font/local"
 import { useCurrentWallet } from "@mysten/dapp-kit"
 import { useAtom } from "jotai/react"
+import { motion } from "motion/react"
 
+import { FloatNav } from "../components/floatNav"
 import { Footer } from "../components/view/footer"
 import { Header } from "../components/view/header"
+import { Publish } from "../components/view/publish"
 import { resultAtom } from "../stores"
 import { cn } from "../utils/cn"
 
@@ -35,11 +38,22 @@ export default function ViewPage() {
         )}
       >
         <Header />
-        <div className="flex h-full flex-row justify-between px-8 leading-loose text-balance max-lg:flex-col-reverse max-lg:px-4 max-md:gap-16 lg:w-2/3 xl:text-2xl">
-          {result}
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            delay: 1,
+            duration: 0.5,
+            ease: "easeInOut"
+          }}
+          className="flex h-full items-center flex-row justify-center px-8 leading-loose text-balance max-lg:flex-col-reverse max-lg:px-4 max-md:gap-16 lg:w-2/3 xl:text-2xl"
+        >
+          {result ? result : "Not result yet"}
+        </motion.div>
         <Footer address={currentWallet?.accounts[0].address ?? ""} />
       </div>
+      <FloatNav />
     </div>
   )
 }

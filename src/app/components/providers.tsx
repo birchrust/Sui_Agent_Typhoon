@@ -1,6 +1,5 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import {
   createNetworkConfig,
   SuiClientProvider,
@@ -24,12 +23,17 @@ const { networkConfig, useNetworkVariable, useNetworkVariables } =
 const queryClient = new QueryClient()
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter()
-
   return (
     <QueryClientProvider client={queryClient}>
       <SuiClientProvider networks={networkConfig} defaultNetwork="testnet">
-        <WalletProvider autoConnect>{children}</WalletProvider>
+        <WalletProvider
+          autoConnect
+          stashedWallet={{
+            name: "LoLAI",
+          }}
+        >
+          {children}
+        </WalletProvider>
       </SuiClientProvider>
     </QueryClientProvider>
   )

@@ -1,9 +1,10 @@
 import type { Metadata } from "next"
 import { Asap, Inter } from "next/font/google"
-import { Toaster } from "sonner"
+import { Toaster } from "react-hot-toast"
 
 import "./globals.css"
 import "@mysten/dapp-kit/dist/index.css"
+import "react-tooltip/dist/react-tooltip.css"
 
 import { ThemeProvider } from "next-themes"
 
@@ -20,7 +21,7 @@ const asap = Asap({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lolai.vercel.app/"),
+  metadataBase: new URL("https://lolai.vercel.app"),
   title: {
     default: "LoLAI",
     template: "%s | LoLAI",
@@ -33,13 +34,13 @@ export const metadata: Metadata = {
     title: "LoLAI",
     description:
       "A collection of awesome test components with smooth animations",
-    url: "https://lolai.vercel.app/",
+    url: "https://lolai.vercel.app",
     siteName: "LoLAI",
     images: [
       {
         width: 1920,
         height: 1080,
-        url: "https://lolai.vercel.app/og.jpg",
+        url: "https://LoLAI.dev/og.jpg",
         alt: "LoLAI Cover",
       },
     ],
@@ -89,23 +90,8 @@ export default function RootLayout({ children }: ComponentPageLayout) {
         className={`${asap.variable} ${inter.className} bg-light-50 dark:bg-dark-50 antialiased transition-colors`}
       >
         <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-          <Providers>
-            {children}
-
-            <Toaster
-              offset={{ bottom: "76px" }}
-              mobileOffset={{ bottom: "76px" }}
-              position="bottom-center"
-              visibleToasts={1}
-              toastOptions={{
-                unstyled: true,
-                classNames: {
-                  toast:
-                    "dark:bg-dark-300 bg-light-50 rounded-lg p-4 border border-light-500 dark:border-dark-500 text-xs shadow-xs w-full",
-                },
-              }}
-            />
-          </Providers>
+          <Providers>{children}</Providers>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
